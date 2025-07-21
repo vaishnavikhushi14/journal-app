@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Journal Entry</title>
+</head>
+<body>
+<h2>Create a New Journal Entry</h2>
+
+<form th:action="@{/journal/add}" th:object="${journalEntry}" method="post">
+    <label>Title:</label><br/>
+    <input type="text" th:field="*{title}" required/><br/><br/>
+
+    <label>Content:</label><br/>
+    <textarea th:field="*{content}" rows="5" cols="40" required></textarea><br/><br/>
+
+    <button type="submit">Save Entry</button>
+</form>
+
+<a href="/journal">Back to Entries</a>
+</body>
+</html>

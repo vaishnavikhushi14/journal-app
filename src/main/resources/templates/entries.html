@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Journal Entries</title>
+</head>
+<body>
+<h2>Welcome, <span th:text="${username}">User</span>!</h2>
+
+<form th:action="@{/journal}" method="get">
+    <label>Date:</label>
+    <input type="date" name="date" />
+    <label>Sort:</label>
+    <select name="sort">
+        <option value="desc">Latest to Oldest</option>
+        <option value="asc">Oldest to Latest</option>
+    </select>
+    <button type="submit">Apply</button>
+</form>
+
+<a href="/journal/new">Create New Entry</a>
+<hr/>
+
+<div th:each="entry : ${entries}">
+    <h3 th:text="${entry.title}"></h3>
+    <p th:text="${entry.content}"></p>
+    <p><strong>Date:</strong> <span th:text="${entry.date}"></span></p>
+
+    <a th:href="@{'/journal/edit/' + ${entry.id}}">Edit</a> |
+    <form th:action="@{'/journal/delete/' + ${entry.id}}" method="post" style="display:inline;">
+        <button type="submit">Delete</button>
+    </form>
+    <hr/>
+</div>
+
+<a href="/logout">Logout</a>
+</body>
+</html>
